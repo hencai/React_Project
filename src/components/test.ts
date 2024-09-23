@@ -31,8 +31,6 @@
 // console.log('c', c);
 // console.log('d', d);
 
-import { reject } from 'lodash';
-
 // enum Color {
 //   Red, Green, Blue
 // }
@@ -61,7 +59,6 @@ import { reject } from 'lodash';
 
 // const mySquare = createSquare({ color: 'red', width: 100 });
 
-
 // type SearchFunc = (source: string, subString: number)  => boolean;
 // let mySearch: SearchFunc;
 // mySearch = function (sb: string, src: number) {
@@ -84,7 +81,6 @@ import { reject } from 'lodash';
 // test(123);
 // test('123');
 // test(true);
-
 
 // type People = {
 //   name: string
@@ -110,7 +106,6 @@ import { reject } from 'lodash';
 // }
 // declare function aliased(arg: Alias): Alias;
 // declare function interfaced(arg: Interface): Interface;
-
 
 // type Square = {
 //   kind: 'square';
@@ -150,7 +145,6 @@ import { reject } from 'lodash';
 // console.log('obj', obj);
 // console.log('copy', copy);
 
-
 // const o1 = { a: 1, b: 1, c: 1 };
 // const o2 = { b: 2, c: 2 };
 // const o3 = { c: 3 };
@@ -189,21 +183,18 @@ import { reject } from 'lodash';
 
 // type TodoPreview = Pick<Todo, 'title' | 'completed'>;
 
-
 // console.log('a' in 'a' | 'b');
 // console.log('b' in ['a', 'b']);
 
 // console.log(5 < 4 ? 1 : 2);
 // type MyBool = true | false;
 
-
 // console.log(Array.isArray([1, 2, 6]));
 
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const debounce = (fn, timeout) => {
-  let timer;
-  return (...args) => {
+const debounce = (fn: Function, timeout: number) => {
+  let timer: NodeJS.Timeout;
+  return (...args: any[]) => {
     clearTimeout(timer);
     timer = setTimeout(() => {
       fn(...args);
@@ -212,9 +203,9 @@ const debounce = (fn, timeout) => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const throttle = (fn, timeout) => {
-  let timer;
-  return (...args) => {
+const throttle = (fn: Function, timeout: number) => {
+  let timer: NodeJS.Timeout | null;
+  return (...args: any[]) => {
     if (timer) {
       return;
     }
@@ -226,42 +217,61 @@ const throttle = (fn, timeout) => {
   };
 };
 
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const anagrams = (str: string) => {
   if (str.length <= 2) return str.length === 2 ? [str, str[1] + str[0]] : [str];
 
-  return str.split('').reduce((acc, letter, i) => acc.concat(anagrams(str.slice(0, i) + str.slice(i + 1)).map(val => letter + val)), []);
+  return str
+    .split("")
+    .reduce(
+      (acc, letter, i) =>
+        acc.concat(
+          anagrams(str.slice(0, i) + str.slice(i + 1)).map(
+            (val) => letter + val
+          )
+        ),
+      []
+    );
 };
-
 
 // console.log(anagrams('abcde'));
 
+// eslint-disable-next-line max-len, @typescript-eslint/no-unused-vars
+const curry = (fn: Function, paramsLength = fn.length, ...args) =>
+  args.length < paramsLength
+    ? fn.bind(null, fn, paramsLength, ...args)
+    : fn(...args);
 
 // eslint-disable-next-line max-len, @typescript-eslint/no-unused-vars
-const curry = (fn: Function, paramsLength = fn.length, ...args) => (args.length < paramsLength ? fn.bind(null, fn, paramsLength, ...args) : fn(...args));
-
-
-// eslint-disable-next-line max-len, @typescript-eslint/no-unused-vars
-const deepFlatten = (array: any[]) => array.reduce((result, item) => result.concat(Array.isArray(item) ? deepFlatten(item) : [item]), []);
-
+const deepFlatten = (array: any[]) =>
+  array.reduce(
+    (result, item) =>
+      result.concat(Array.isArray(item) ? deepFlatten(item) : [item]),
+    []
+  );
 
 // console.log(deepFlatten([1, 2, [3, 4, [5]], 6]));
 
-
 // eslint-disable-next-line max-len, @typescript-eslint/no-unused-vars
-const flattenWithDepth = (array: any[], depth: number) => (depth === 0 ? array : array.reduce((res, item) => res.concat((Array.isArray(item) ? flattenWithDepth(item, depth - 1) : [item])), []));
-
+const flattenWithDepth = (array: any[], depth: number) =>
+  depth === 0
+    ? array
+    : array.reduce(
+        (res, item) =>
+          res.concat(
+            Array.isArray(item) ? flattenWithDepth(item, depth - 1) : [item]
+          ),
+        []
+      );
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const flattenOnce = arr => arr.reduce((a, v) => a.concat(v), []);
+const flattenOnce = (arr: any[]) => arr.reduce((a, v) => a.concat(v), []);
 
 // console.log(flatten([1, 2, [3, 4, [5, [8, 9]]], 6], 2));
 // console.log(flatten2([1, 2, [3, 4, [5, [8, 9]]], 6]));
 
-
 const a = new Array(3);
-a.map(item => ({
+a.map((item) => ({
   text: item?.text,
   name: item?.name,
   sex: item?.sex,
@@ -269,13 +279,15 @@ a.map(item => ({
 
 // console.log(a.length);
 
-
 // eslint-disable-next-line max-len, @typescript-eslint/no-unused-vars
-const flatten = (arr: any[]) => arr.reduce((res, cur) => (Array.isArray(cur) ? res.concat(flatten(cur)) : res.concat([cur])), []);
-
+const flatten = (arr: any[]) =>
+  arr.reduce(
+    (res, cur) =>
+      Array.isArray(cur) ? res.concat(flatten(cur)) : res.concat([cur]),
+    []
+  );
 
 // console.log(flatten2([1, 2, [3, 4, [5, [8, 9]]], 6]));
-
 
 // for in 遍历对象key，不推荐 并且遍历原型链 不合适
 // eslint-disable-next-line no-restricted-syntax
@@ -283,31 +295,33 @@ const flatten = (arr: any[]) => arr.reduce((res, cur) => (Array.isArray(cur) ? r
 //   console.log(key);
 // }
 
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const data = [1, 3, 5, 7, [4, [6, [7, 9]], 2], 1];
 
-
 // eslint-disable-next-line max-len, @typescript-eslint/no-unused-vars
-const flattenToDepth = (target: any[], depth: number) => (depth === 0 ? target : target.reduce((res, cur) => res.concat(Array.isArray(cur) ? flattenToDepth(cur, depth - 1) : cur), []));
+const flattenToDepth = (target: any[], depth: number) =>
+  depth === 0
+    ? target
+    : target.reduce(
+        (res, cur) =>
+          res.concat(Array.isArray(cur) ? flattenToDepth(cur, depth - 1) : cur),
+        []
+      );
 
 // console.log(flattenToDepth(data, 2));
 
-
 const dataA = [[1], [5], [3, 4, 5, 6]];
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const newData = dataA.map(item => (item.length === 1 ? item[0] : item));
+const newData = dataA.map((item) => (item.length === 1 ? item[0] : item));
 
 // console.log(newData);
 
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const testObject = {
-  a: 1,
-  [Symbol.toPrimitive]: hint => (hint === 'number' ? 123 : 456),
-};
+// const testObject = {
+//   a: 1,
+//   [Symbol.toPrimitive]: (hint: String) => (hint === "number" ? 123 : 456),
+// };
 // const s1 = Symbol('1');
-
 
 // console.log(String(flattenToDepth), 123);
 // console.log(String(dataA));
@@ -321,19 +335,20 @@ const testObject = {
 
 // 这种方式无法准确还原原始数据的类型
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const flattenUseString = (array: any[]) => String(array).split(',')
-  .map(item => JSON.parse(item));
+const flattenUseString = (array: any[]) =>
+  String(array)
+    .split(",")
+    .map((item) => JSON.parse(item));
 
 // console.log(flattenUseString(dataA));
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const toArr = (data: any) => (Array.isArray(data) ? data : [data]);
 
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const debounce1 = (fn: Function, delay: number) => {
-  let timer;
-  return (...rest) => {
+  let timer: NodeJS.Timeout;
+  return (...rest: any[]) => {
     clearTimeout(timer);
     timer = setTimeout(() => {
       fn(...rest);
@@ -341,11 +356,10 @@ const debounce1 = (fn: Function, delay: number) => {
   };
 };
 
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const throttle1 = (fn: Function, delay: number) => {
-  let timer;
-  return (...rest) => {
+  let timer: NodeJS.Timeout | null;
+  return (...rest: any[]) => {
     if (!timer) {
       timer = setTimeout(() => {
         fn(...rest);
@@ -354,7 +368,6 @@ const throttle1 = (fn: Function, delay: number) => {
     }
   };
 };
-
 
 // 每隔300ms轮询一次接口，如果接口状态码为200,则停止轮询
 
@@ -434,7 +447,6 @@ const throttle1 = (fn: Function, delay: number) => {
 //   console.log('script end');
 // }
 
-
 /**
  * script start
  * async1 start
@@ -447,13 +459,15 @@ const throttle1 = (fn: Function, delay: number) => {
  */
 
 new Promise((resove, reject) => {
-  reject('');
-}).then((data) => {
-  // console.log(data, '成功');
-}, (reason) => {
-  // console.log(reason, '失败');
-});
-
+  reject("");
+}).then(
+  (data) => {
+    // console.log(data, '成功');
+  },
+  (reason) => {
+    // console.log(reason, '失败');
+  }
+);
 
 /**
  * Promise题目
@@ -525,7 +539,6 @@ new Promise((resove, reject) => {
 // // 整个执行完没有报错，状态返回fulfilled
 // }
 
-
 /**
  * 浏览器事件循环
  */
@@ -552,7 +565,6 @@ new Promise((resove, reject) => {
 //    * setTimeout
 //    */
 // }
-
 
 // {
 //   async function async1() {
@@ -623,7 +635,6 @@ new Promise((resove, reject) => {
 //    */
 // }
 
-
 // const getVideoDuration = async (file: File) => {
 //   // 创建 video DOM 元素  设置播放视频之前加载哪些信息，设置DOM元素加载视频 URL
 //   const video = document.createElement('video');
@@ -649,18 +660,18 @@ new Promise((resove, reject) => {
 //   return videoTime;
 // };
 
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getVideoDuration = async (file: File) => {
-  const video = document.createElement('video');
-  video.preload = 'metadata';
+  const video = document.createElement("video");
+  video.preload = "metadata";
   video.src = URL.createObjectURL(file);
 
   const duration = await new Promise<number>((resolve, reject) => {
-    video.addEventListener('loadedmetadata', () => {
+    video.addEventListener("loadedmetadata", () => {
       resolve(video.duration);
     });
 
-    video.addEventListener('error', () => {
+    video.addEventListener("error", () => {
       reject();
     });
   });
@@ -669,5 +680,3 @@ const getVideoDuration = async (file: File) => {
 
   return duration;
 };
-
-console.log(null === '0');
