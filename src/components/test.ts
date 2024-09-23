@@ -1,0 +1,673 @@
+// import _ from 'lodash';
+// import _ from 'lodash';
+// const test1 = [
+//   { id: 0, title: 'Big Bellies' },
+//   { id: 1, title: 'Lunar Landscape' },
+//   { id: 2, title: 'Terracotta Army' },
+// ];
+// const test2 = [...test1];
+// test2[0].title = 'test';
+// console.log('test1, test2', test1, test2);
+// class Person {
+//   #address = '123';
+//   constructor(name, age) {
+//     this.name = name;
+//     this.age = age;
+//   }
+//   update() {
+//     console.log(123);
+//     this.#address = '456';
+//     console.log('address', this.#address);
+//   }
+// }
+// const student = new Person('xiaobai', 18);
+// student.update();
+// const obj = { a: 1, b: { c: 2 } };
+// const { a, b: { c: d } } = obj;
+// const b: typeof obj;
+// console.log(typeof obj);
+// console.log('a', a);
+// console.log('b', b);
+// console.log('c', c);
+// console.log('d', d);
+
+import { reject } from 'lodash';
+
+// enum Color {
+//   Red, Green, Blue
+// }
+// const c: Color = Color.Green;
+// console.log(c);
+
+// console.log(typeof null);
+// const o = {
+//   a: 'foo',
+//   b: 12,
+//   c: 'bar',
+// };
+// const { a: newName1, b: newName2 }: {a: string, b: number} = o;
+// console.log(newName1, newName2);
+
+// interface SquareConfig {
+//   color?: string;
+//   width?: number;
+//   [keyName: string]: any;
+// }
+
+// function createSquare(config: SquareConfig): { color: string; area: number } {
+//   console.log(config);
+//   // ...
+// }
+
+// const mySquare = createSquare({ color: 'red', width: 100 });
+
+
+// type SearchFunc = (source: string, subString: number)  => boolean;
+// let mySearch: SearchFunc;
+// mySearch = function (sb: string, src: number) {
+//   console.log(sb, src);
+//   return false;
+// };
+
+// function buildName(lastName = 'Smith', firstName: string) {
+//   return `${firstName} ${lastName}`;
+// }
+// function test<T>(arg: T) {
+//   console.log(arg);
+//   return arg;
+// }
+
+// const test = <T>(arg: T) => {
+//   console.log(arg);
+//   return arg;
+// };
+// test(123);
+// test('123');
+// test(true);
+
+
+// type People = {
+//   name: string
+//   age: number
+//   hobby: number[]
+// };
+// // 使的接口属性变为可选属性
+// type commenPeople = Pick<People, 'name'>;
+
+// type RecordObj = Record<'a'|'b'|'c', string[]>;
+// const obj: RecordObj = {
+//   a: ['1'],
+//   b: ['1'],
+//   c: ['1'],
+// };
+// type Test = number | undefined;
+// const a: Test = undefined;
+// console.log(a || 5);
+
+// type Alias = { num: number };
+// interface Interface {
+//   num: number;
+// }
+// declare function aliased(arg: Alias): Alias;
+// declare function interfaced(arg: Interface): Interface;
+
+
+// type Square = {
+//   kind: 'square';
+//   size: number;
+// };
+// type Rectangle = {
+//   kind: 'rectangle';
+//   width: number;
+//   height: number;
+// };
+// type Circle = {
+//   kind: 'circle';
+//   radius: number;
+// };
+
+// type a = Square | Rectangle | Circle;
+
+// const a = {
+//   name: 'xbai',
+//   age: 18,
+//   handSome: false,
+// };
+
+// type test =  typeof a;
+
+// const target = { a: 1, b: 2 };
+// const target2 = { c: 3, d: 4 };
+// const res = Object.assign(target, target2);
+// console.log(target);
+// console.log(target2);
+// console.log(res);
+
+// const obj = { a: 1, b: { c: 1 } };
+// const copy = Object.assign({}, obj);
+// copy.a = 2;
+// copy.b.c = 3;
+// console.log('obj', obj);
+// console.log('copy', copy);
+
+
+// const o1 = { a: 1, b: 1, c: 1 };
+// const o2 = { b: 2, c: 2 };
+// const o3 = { c: 3 };
+
+// const obj = Object.assign({}, o3, o2, o1);
+// console.log(obj); // { a: 1, b: 2, c: 3 }
+
+// const a = ['a', 'b', 'c', 'd'];
+// console.log(a);
+// console.log(_.chunk(a, 3));
+
+// const a: any = ['a', 'b', 'c', 'd', { d: 5 }];
+// const b: any = [1, 2, 3, 4];
+// const c = _.concat(a, b);
+// console.log('a', a);
+// console.log('c', c);
+// console.log('修改后');
+// c[4].d = 'xbai';
+// console.log('a', a);
+// console.log('c', c);
+
+// interface Todo {
+//   title: string;
+//   description: string;
+//   completed: boolean;
+//   createdAt: number;
+// }
+
+// type TodoPreview = Omit<Todo, 'description'>;
+
+// interface Todo {
+//   title: string;
+//   description: string;
+//   completed: boolean;
+// }
+
+// type TodoPreview = Pick<Todo, 'title' | 'completed'>;
+
+
+// console.log('a' in 'a' | 'b');
+// console.log('b' in ['a', 'b']);
+
+// console.log(5 < 4 ? 1 : 2);
+// type MyBool = true | false;
+
+
+// console.log(Array.isArray([1, 2, 6]));
+
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const debounce = (fn, timeout) => {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn(...args);
+    }, timeout);
+  };
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const throttle = (fn, timeout) => {
+  let timer;
+  return (...args) => {
+    if (timer) {
+      return;
+    }
+
+    timer = setTimeout(() => {
+      fn(...args);
+      timer = null;
+    }, timeout);
+  };
+};
+
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const anagrams = (str: string) => {
+  if (str.length <= 2) return str.length === 2 ? [str, str[1] + str[0]] : [str];
+
+  return str.split('').reduce((acc, letter, i) => acc.concat(anagrams(str.slice(0, i) + str.slice(i + 1)).map(val => letter + val)), []);
+};
+
+
+// console.log(anagrams('abcde'));
+
+
+// eslint-disable-next-line max-len, @typescript-eslint/no-unused-vars
+const curry = (fn: Function, paramsLength = fn.length, ...args) => (args.length < paramsLength ? fn.bind(null, fn, paramsLength, ...args) : fn(...args));
+
+
+// eslint-disable-next-line max-len, @typescript-eslint/no-unused-vars
+const deepFlatten = (array: any[]) => array.reduce((result, item) => result.concat(Array.isArray(item) ? deepFlatten(item) : [item]), []);
+
+
+// console.log(deepFlatten([1, 2, [3, 4, [5]], 6]));
+
+
+// eslint-disable-next-line max-len, @typescript-eslint/no-unused-vars
+const flattenWithDepth = (array: any[], depth: number) => (depth === 0 ? array : array.reduce((res, item) => res.concat((Array.isArray(item) ? flattenWithDepth(item, depth - 1) : [item])), []));
+
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const flattenOnce = arr => arr.reduce((a, v) => a.concat(v), []);
+
+// console.log(flatten([1, 2, [3, 4, [5, [8, 9]]], 6], 2));
+// console.log(flatten2([1, 2, [3, 4, [5, [8, 9]]], 6]));
+
+
+const a = new Array(3);
+a.map(item => ({
+  text: item?.text,
+  name: item?.name,
+  sex: item?.sex,
+}));
+
+// console.log(a.length);
+
+
+// eslint-disable-next-line max-len, @typescript-eslint/no-unused-vars
+const flatten = (arr: any[]) => arr.reduce((res, cur) => (Array.isArray(cur) ? res.concat(flatten(cur)) : res.concat([cur])), []);
+
+
+// console.log(flatten2([1, 2, [3, 4, [5, [8, 9]]], 6]));
+
+
+// for in 遍历对象key，不推荐 并且遍历原型链 不合适
+// eslint-disable-next-line no-restricted-syntax
+// for (const key in { a: 1, b: 2, c: 3 }) {
+//   console.log(key);
+// }
+
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const data = [1, 3, 5, 7, [4, [6, [7, 9]], 2], 1];
+
+
+// eslint-disable-next-line max-len, @typescript-eslint/no-unused-vars
+const flattenToDepth = (target: any[], depth: number) => (depth === 0 ? target : target.reduce((res, cur) => res.concat(Array.isArray(cur) ? flattenToDepth(cur, depth - 1) : cur), []));
+
+// console.log(flattenToDepth(data, 2));
+
+
+const dataA = [[1], [5], [3, 4, 5, 6]];
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const newData = dataA.map(item => (item.length === 1 ? item[0] : item));
+
+// console.log(newData);
+
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const testObject = {
+  a: 1,
+  [Symbol.toPrimitive]: hint => (hint === 'number' ? 123 : 456),
+};
+// const s1 = Symbol('1');
+
+
+// console.log(String(flattenToDepth), 123);
+// console.log(String(dataA));
+// console.log(testObject);
+// console.log(String(testObject));
+
+// console.log(s1);
+// console.log(String(s1));
+
+// console.log(Number(testObject));
+
+// 这种方式无法准确还原原始数据的类型
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const flattenUseString = (array: any[]) => String(array).split(',')
+  .map(item => JSON.parse(item));
+
+// console.log(flattenUseString(dataA));
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const toArr = (data: any) => (Array.isArray(data) ? data : [data]);
+
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const debounce1 = (fn: Function, delay: number) => {
+  let timer;
+  return (...rest) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn(...rest);
+    }, delay);
+  };
+};
+
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const throttle1 = (fn: Function, delay: number) => {
+  let timer;
+  return (...rest) => {
+    if (!timer) {
+      timer = setTimeout(() => {
+        fn(...rest);
+        timer = null;
+      }, delay);
+    }
+  };
+};
+
+
+// 每隔300ms轮询一次接口，如果接口状态码为200,则停止轮询
+
+/**
+ * async / await 输出题
+ */
+
+// {
+//   async function async1() {
+//     console.log('async1 start');
+//     await async2();
+//     console.log('async1 end'); // 关键在这一步，它相当于放在 callback 中，最后执行
+//     // 类似于Promise.resolve().then(()=>console.log('async1 end'))
+//   }
+
+//   async function async2() {
+//     console.log('async2');
+//   }
+
+//   console.log('script start');
+//   async1();
+//   console.log('script end');
+// }
+
+// {
+//   async function async1() {
+//     console.log('async1 start'); // 2
+//     await async2();
+
+//     // await后面的下面三行都是异步回调callback的内容
+//     console.log('async1 end'); // 5 关键在这一步，它相当于放在 callback 中，最后执行
+//     // 类似于Promise.resolve().then(()=>console.log('async1 end'))
+//     await async3();
+
+//     // await后面的下面1行都是异步回调callback的内容
+//     console.log('async1 end2'); // 7
+//   }
+
+//   async function async2() {
+//     console.log('async2'); // 3
+//   }
+//   async function async3() {
+//     console.log('async3'); // 6
+//   }
+
+//   console.log('script start'); // 1
+//   async1();
+//   console.log('script end'); // 4
+// }
+
+// {
+//   async function async1() {
+//     console.log('async1 start');
+//     await async2(); // 这一句会同步执行，返回 Promise ，其中的 `console.log('async2')` 也会同步执行
+//     console.log('async1 end'); // 上面有 await ，下面就变成了“异步”，类似 cakkback 的功能（微任务）
+//   }
+
+//   async function async2() {
+//     console.log('async2');
+//   }
+
+//   console.log('script start');
+
+//   setTimeout(() => { // 异步，宏任务
+//     console.log('setTimeout');
+//   }, 0);
+
+//   async1();
+
+//   new Promise((resolve) => { // 返回 Promise 之后，即同步执行完成，then 是异步代码
+//     console.log('promise1'); // Promise 的函数体会立刻执行
+//     resolve('');
+//   }).then(() => { // 异步，微任务
+//     console.log('promise2');
+//   });
+
+//   console.log('script end');
+// }
+
+
+/**
+ * script start
+ * async1 start
+ * async2
+ * promise1
+ * script end
+ * async1 end
+ * promise2
+ * setTimeout
+ */
+
+new Promise((resove, reject) => {
+  reject('');
+}).then((data) => {
+  // console.log(data, '成功');
+}, (reason) => {
+  // console.log(reason, '失败');
+});
+
+
+/**
+ * Promise题目
+ */
+// {
+//   const p1 = Promise.resolve().then(() => 100);
+//   console.log('p1', p1); // fulfilled会触发后续then回调
+//   p1.then(() => {
+//     console.log(123);
+//   }); // 打印123
+
+//   const p2 = Promise.resolve().then(() => {
+//     throw new Error('then error');
+//   });
+//   // p2是rejected会触发后续catch回调
+//   p2.then(() => {
+//     console.log(456);
+//   }).catch((err) => {
+//     console.log(789);
+//   });
+//   // 打印789
+// }
+
+// {
+//   const p1 = Promise.reject('my error').catch(() => {
+//     console.log('catch error');
+//   });
+//   p1.then(() => {
+//     console.log(1);
+//   });
+//   // console.log(p1) p1返回fulfilled 触发then回调
+//   const p2 = Promise.reject('my error').catch(() => {
+//     throw new Error('catch error');
+//   });
+//   // console.log(p2) p2返回rejected 触发catch回调
+//   p2.then(() => {
+//     console.log(2);
+//   }).catch(() => {
+//     console.log(3);
+//   });
+// }
+
+// {
+//   // 第一题
+//   Promise.resolve()
+//     .then(() => console.log(1))// 状态返回fulfilled
+//     .catch(() => console.log(2)) // catch中没有报错，状态返回fulfilled，后面的then会执行
+//     .then(() => console.log(3)); // 1,3
+//   // 整个执行完没有报错，状态返回fulfilled
+
+//   // 第二题
+//   Promise.resolve()
+//     .then(() => { // then中有报错 状态返回rejected,后面的catch会执行
+//       console.log(1);
+//       throw new Error('error');
+//     })
+//     .catch(() => console.log(2)) // catch中没有报错，状态返回fulfilled，后面的then会执行
+//     .then(() => console.log(3)); // 1,2,3
+//   // 整个执行完没有报错，状态返回fulfilled
+
+//   // 第三题
+//   Promise.resolve()
+//     .then(() => { // then中有报错 状态返回rejected，后面的catch会执行
+//       console.log(1);
+//       throw new Error('error');
+//     })
+//     .catch(() => console.log(2)) // catch中没有报错，状态返回fulfilled，后面的catch不会执行
+//     .catch(() => console.log(3)); // 1，2
+// // 整个执行完没有报错，状态返回fulfilled
+// }
+
+
+/**
+ * 浏览器事件循环
+ */
+
+// {
+//   console.log('script start');
+
+//   setTimeout(() => {
+//     console.log('setTimeout');
+//   }, 0);
+
+//   Promise.resolve().then(() => {
+//     console.log('promise1');
+//   })
+//     .then(() => {
+//       console.log('promise2');
+//     });
+//   console.log('script end');
+//   /**
+//    * script start
+//    * script end
+//    * promise1
+//    * promise2
+//    * setTimeout
+//    */
+// }
+
+
+// {
+//   async function async1() {
+//     console.log('async1 start');
+//     await async2();
+//     console.log('async1 end');
+//   }
+//   async function async2() {
+//     console.log('async2');
+//   }
+
+//   console.log('script start');
+
+//   setTimeout(() => {
+//     console.log('setTimeout');
+//   }, 0);
+
+//   async1();
+
+//   new Promise((resolve) => {
+//     console.log('promise1');
+//     resolve('');
+//   }).then(() => {
+//     console.log('promise2');
+//   });
+//   console.log('script end');
+//   /**
+//    * script start
+//    * async1 start
+//    * async2
+//    * promise1
+//    * script end
+//    * async1 end
+//    * promise2
+//    * setTimeout
+//    */
+// }
+
+// {
+//   const first = () => (new Promise((resolve, reject) => {
+//     console.log(3);
+//     const p = new Promise((resolve, reject) => {
+//       console.log(7);
+//       setTimeout(() => {
+//         console.log(5);
+//         resolve(6);
+//       }, 0);
+//       resolve(1);
+//     });
+//     resolve(2);
+//     p.then((arg) => { // 1
+//       console.log(arg);
+//     });
+//   }));
+
+//   first().then((arg) => {
+//     console.log(arg); // 2
+//   });
+//   console.log(4);
+
+//   /**
+//    * 3
+//    * 7
+//    * 4
+//    * 1
+//    * 2
+//    * 5
+//    */
+// }
+
+
+// const getVideoDuration = async (file: File) => {
+//   // 创建 video DOM 元素  设置播放视频之前加载哪些信息，设置DOM元素加载视频 URL
+//   const video = document.createElement('video');
+//   video.preload = 'metadata';
+//   video.src = URL.createObjectURL(file);
+
+//   // 使用异步阻塞 监听 loadedmetadata 事件，以及error事件，获得视频时长
+//   const videoTime = await new Promise<number>((resolve, reject) => {
+//     video.addEventListener('loadedmetadata', () => {
+//       resolve(video.duration);
+//     });
+
+//     video.addEventListener('error', () => {
+//       reject();
+//     });
+//   });
+
+//   // 手动释放URL对象
+
+//   URL.revokeObjectURL(video.src);
+
+//   // 返回视频时长
+//   return videoTime;
+// };
+
+
+const getVideoDuration = async (file: File) => {
+  const video = document.createElement('video');
+  video.preload = 'metadata';
+  video.src = URL.createObjectURL(file);
+
+  const duration = await new Promise<number>((resolve, reject) => {
+    video.addEventListener('loadedmetadata', () => {
+      resolve(video.duration);
+    });
+
+    video.addEventListener('error', () => {
+      reject();
+    });
+  });
+
+  URL.revokeObjectURL(video.src);
+
+  return duration;
+};
+
+console.log(null === '0');
