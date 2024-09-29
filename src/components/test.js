@@ -2,7 +2,6 @@
 
 // test(123)
 
-
 // var num =2;
 // function a_func() {
 //   let num = 3;
@@ -21,14 +20,12 @@
 
 // obj.func()
 
-
 Function.prototype.fn1 = () => console.log(1);
 Object.prototype.fn2 = () => console.log(2);
 
-const fn  =new Function();
+const fn = new Function();
 // fn.fn1()
 // fn.fn2()
-
 
 // 写一个循环，每隔1s打印123456f
 
@@ -39,8 +36,6 @@ for (var i = 0; i < 6; i++) {
     }, j * 1000);
   })(i);
 }
-
-
 
 for (let i = 0; i < 6; i++) {
   setTimeout(() => {
@@ -56,32 +51,36 @@ for (var i = 0; i < 6; i++) {
 }
 
 for (var i = 0; i < 6; i++) {
-  setTimeout((j) => {
-    // console.log(j);
-  }, i * 1000, i);
+  setTimeout(
+    (j) => {
+      // console.log(j);
+    },
+    i * 1000,
+    i
+  );
 }
 
-
 // 自己实现第一版
-const fetchData = async (api, param) => new Promise((resolve, reject) => {
-  console.log('请求接口');
-  // const data = await axios.get(api, param);
+const fetchData = async (api, param) =>
+  new Promise((resolve, reject) => {
+    console.log('请求接口');
+    // const data = await axios.get(api, param);
 
-  const data = { code: 200, reason: '' };
-  if (data.code === 200) {
-    resolve(data);
-  } else {
-    reject(data.reason);
-  }
-});
+    const data = { code: 200, reason: '' };
+    if (data.code === 200) {
+      resolve(data);
+    } else {
+      reject(data.reason);
+    }
+  });
 
 const poll = (api, param) => {
   let data;
   let timer = setTimeout(async () => {
     try {
       data = await fetchData(api, param);
-    } catch(e) {
-      data = null
+    } catch (e) {
+      data = null;
       console.log('e');
     }
     if (data && data.code === 200) {
@@ -94,8 +93,6 @@ const poll = (api, param) => {
 };
 
 // poll('', '')
-
-
 
 /**
  * 继承相关
@@ -111,17 +108,17 @@ const poll = (api, param) => {
     function Father() {
       this.father = 'Father';
     }
-  
+
     function Child() {
       this.child = 'Child';
     }
-  
+
     Child.prototype = new Father();
     const child = new Child();
-    child.constructor = Child
+    child.constructor = Child;
     console.log(child.constructor);
   }
-  
+
   {
     // 构造函数继承
     /**
@@ -132,22 +129,21 @@ const poll = (api, param) => {
     function Father() {
       this.father = 'Father';
     }
-    
+
     Father.prototype.sayFather = () => {
       console.log('我是父亲');
-    }
-  
+    };
+
     function Child() {
-      Father.call(this)
+      Father.call(this);
       this.child = 'Child';
     }
-  
+
     const child = new Child();
     console.log(child.constructor);
     console.log(child.name);
   }
-  
-  
+
   {
     // 组合继承
     /**
@@ -158,17 +154,17 @@ const poll = (api, param) => {
     function Father() {
       this.father = 'Father';
     }
-  
+
     function Child() {
       Father.call(this, ...arguments);
       this.child = 'Child';
     }
-  
+
     Child.prototype = new Father();
-  
+
     const child = new Child(1, 2, 3);
   }
-  
+
   {
     // 寄生继承
     /**
@@ -178,12 +174,12 @@ const poll = (api, param) => {
     function Father() {
       this.father = 'Father';
     }
-  
+
     function Child() {
       Father.call(this);
       this.child = 'Child';
     }
-  
+
     Child.prototype = Object.create(Father.prototype, {
       constructor: {
         value: Child,
@@ -192,7 +188,7 @@ const poll = (api, param) => {
         configurable: true
       }
     });
-  
+
     const child = new Child(1, 2, 3);
   }
 
@@ -217,20 +213,22 @@ const poll = (api, param) => {
   }
 }
 
+console.log('笔试..........................');
 
+{
+  function maxScore(m, counts) {
+    const availableCounts = counts.filter((count) => count > 0);
 
+    const distinctCardCount = availableCounts.length;
 
+    return Math.min(
+      distinctCardCount,
+      availableCounts.reduce((sum, count) => sum + 1, 0)
+    );
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  const m = 5;
+  const numbers = [3, 2, 1, 0, 1];
+  const result = maxScore(m, numbers);
+  console.log(result);
+}

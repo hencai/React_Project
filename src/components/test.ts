@@ -221,48 +221,21 @@ const throttle = (fn: Function, timeout: number) => {
 const anagrams = (str: string) => {
   if (str.length <= 2) return str.length === 2 ? [str, str[1] + str[0]] : [str];
 
-  return str
-    .split("")
-    .reduce(
-      (acc, letter, i) =>
-        acc.concat(
-          anagrams(str.slice(0, i) + str.slice(i + 1)).map(
-            (val) => letter + val
-          )
-        ),
-      []
-    );
+  return str.split('').reduce((acc, letter, i) => acc.concat(anagrams(str.slice(0, i) + str.slice(i + 1)).map((val) => letter + val)), []);
 };
 
 // console.log(anagrams('abcde'));
 
 // eslint-disable-next-line max-len, @typescript-eslint/no-unused-vars
-const curry = (fn: Function, paramsLength = fn.length, ...args) =>
-  args.length < paramsLength
-    ? fn.bind(null, fn, paramsLength, ...args)
-    : fn(...args);
+const curry = (fn: Function, paramsLength = fn.length, ...args) => (args.length < paramsLength ? fn.bind(null, fn, paramsLength, ...args) : fn(...args));
 
 // eslint-disable-next-line max-len, @typescript-eslint/no-unused-vars
-const deepFlatten = (array: any[]) =>
-  array.reduce(
-    (result, item) =>
-      result.concat(Array.isArray(item) ? deepFlatten(item) : [item]),
-    []
-  );
+const deepFlatten = (array: any[]) => array.reduce((result, item) => result.concat(Array.isArray(item) ? deepFlatten(item) : [item]), []);
 
 // console.log(deepFlatten([1, 2, [3, 4, [5]], 6]));
 
 // eslint-disable-next-line max-len, @typescript-eslint/no-unused-vars
-const flattenWithDepth = (array: any[], depth: number) =>
-  depth === 0
-    ? array
-    : array.reduce(
-        (res, item) =>
-          res.concat(
-            Array.isArray(item) ? flattenWithDepth(item, depth - 1) : [item]
-          ),
-        []
-      );
+const flattenWithDepth = (array: any[], depth: number) => (depth === 0 ? array : array.reduce((res, item) => res.concat(Array.isArray(item) ? flattenWithDepth(item, depth - 1) : [item]), []));
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const flattenOnce = (arr: any[]) => arr.reduce((a, v) => a.concat(v), []);
@@ -274,18 +247,13 @@ const a = new Array(3);
 a.map((item) => ({
   text: item?.text,
   name: item?.name,
-  sex: item?.sex,
+  sex: item?.sex
 }));
 
 // console.log(a.length);
 
 // eslint-disable-next-line max-len, @typescript-eslint/no-unused-vars
-const flatten = (arr: any[]) =>
-  arr.reduce(
-    (res, cur) =>
-      Array.isArray(cur) ? res.concat(flatten(cur)) : res.concat([cur]),
-    []
-  );
+const flatten = (arr: any[]) => arr.reduce((res, cur) => (Array.isArray(cur) ? res.concat(flatten(cur)) : res.concat([cur])), []);
 
 // console.log(flatten2([1, 2, [3, 4, [5, [8, 9]]], 6]));
 
@@ -299,14 +267,7 @@ const flatten = (arr: any[]) =>
 const data = [1, 3, 5, 7, [4, [6, [7, 9]], 2], 1];
 
 // eslint-disable-next-line max-len, @typescript-eslint/no-unused-vars
-const flattenToDepth = (target: any[], depth: number) =>
-  depth === 0
-    ? target
-    : target.reduce(
-        (res, cur) =>
-          res.concat(Array.isArray(cur) ? flattenToDepth(cur, depth - 1) : cur),
-        []
-      );
+const flattenToDepth = (target: any[], depth: number) => (depth === 0 ? target : target.reduce((res, cur) => res.concat(Array.isArray(cur) ? flattenToDepth(cur, depth - 1) : cur), []));
 
 // console.log(flattenToDepth(data, 2));
 
@@ -337,7 +298,7 @@ const newData = dataA.map((item) => (item.length === 1 ? item[0] : item));
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const flattenUseString = (array: any[]) =>
   String(array)
-    .split(",")
+    .split(',')
     .map((item) => JSON.parse(item));
 
 // console.log(flattenUseString(dataA));
@@ -459,7 +420,7 @@ const throttle1 = (fn: Function, delay: number) => {
  */
 
 new Promise((resove, reject) => {
-  reject("");
+  reject('');
 }).then(
   (data) => {
     // console.log(data, '成功');
@@ -661,22 +622,139 @@ new Promise((resove, reject) => {
 // };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getVideoDuration = async (file: File) => {
-  const video = document.createElement("video");
-  video.preload = "metadata";
-  video.src = URL.createObjectURL(file);
+// const getVideoDuration = async (file: File) => {
+//   const video = document.createElement("video");
+//   video.preload = "metadata";
+//   video.src = URL.createObjectURL(file);
 
-  const duration = await new Promise<number>((resolve, reject) => {
-    video.addEventListener("loadedmetadata", () => {
-      resolve(video.duration);
-    });
+//   const duration = await new Promise<number>((resolve, reject) => {
+//     video.addEventListener("loadedmetadata", () => {
+//       resolve(video.duration);
+//     });
 
-    video.addEventListener("error", () => {
-      reject();
-    });
-  });
+//     video.addEventListener("error", () => {
+//       reject();
+//     });
+//   });
 
-  URL.revokeObjectURL(video.src);
+//   URL.revokeObjectURL(video.src);
 
-  return duration;
+//   return duration;
+// };
+
+/**
+ * 防抖,规定时间内执行一次，点击终止上次事件
+ * @param fn
+ * @param delay
+ */
+const debounce0926 = (fn: Function, delay: number) => {
+  let timer: NodeJS.Timeout | null;
+  return (...args: any[]) => {
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    timer = setTimeout(() => {
+      fn.call(this, ...args);
+      timer = null;
+    }, delay);
+  };
 };
+
+/**
+ * 节流, 多次执行执行一次，点击不中断 继续等待上次事件执行结果
+ * @param fn
+ * @param delay
+ * @returns
+ */
+const throttle09261 = (fn: Function, delay: number) => {
+  let timer: NodeJS.Timeout | null;
+  return (...args) => {
+    if (timer) {
+      return;
+    }
+
+    timer = setTimeout(() => {
+      fn.call(this, ...args);
+      timer = null;
+    }, delay);
+  };
+};
+
+const throttle09262 = (fn: Function, delay: number) => {
+  let lastTime = 0;
+  return (...args) => {
+    const now = Date.now();
+    const spend = now - lastTime;
+    if (spend < delay) {
+      return;
+    }
+
+    lastTime = Date.now();
+    fn.call(this, ...args);
+  };
+};
+
+{
+  /**
+   * 实现instanceof
+   */
+
+  // 实例.__proto__ === 构造函数.prototype
+  const myInstanceof = (instance: any, classOrFunc: any) => {
+    // 实例不是对象返回false  判断instance不是基本数据类型
+    if (typeof instance !== 'object' || instance === null) {
+      return false;
+    }
+    // 构造函数是基本数据类型返回false
+    if (typeof classOrFunc !== 'object' && classOrFunc !== null && typeof classOrFunc !== 'function') {
+      return false;
+    }
+
+    let instanceProto = Object.getPrototypeOf(instance);
+
+    while (instanceProto) {
+      if (instanceProto === classOrFunc.prototype) return true;
+      instanceProto = Object.getPrototypeOf(instanceProto);
+    }
+
+    return false;
+  };
+
+  console.log('test', myInstanceof(null, Array)); // false
+  console.log('test', myInstanceof([], Array)); // true
+  console.log('test', myInstanceof('', Array)); // false
+  console.log('test', myInstanceof({}, Object)); // true
+}
+
+{
+  /**
+   * 返回 min - max之间的随机整数,不包含最大值,包含最小值
+   * @param min
+   * @param max
+   * @returns
+   */
+  const randomNumber = (min, max) => Math.floor(Math.random() * (max - min) + min);
+}
+
+{
+  /**
+   *  new过程都干了些什么
+   * @param constructor
+   * @param args
+   */
+  const myNew = (constructor: Function, ...args: any[]) => {
+    const newObj = Object.create(constructor.prototype);
+
+    let res = constructor.apply(newObj, args);
+
+    return typeof res === 'object' ? res : newObj;
+  };
+
+  // 用法
+
+  function Person(name: string, age: number) {
+    this.name = name;
+    this.age;
+  }
+}
