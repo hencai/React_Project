@@ -1,24 +1,34 @@
 {
   "compilerOptions": {
+    // 指定ts版本
     "target": "ES2022",
+    // 编译过程需要引入库的列表
     "lib": ["ES2023"],
+    // 指定输出哪个模块系统的代码
     "module": "ESNext",
+    // 忽略所有*.d.ts类型声明文件的检查
     "skipLibCheck": true,
 
     /* Bundler mode */
+    // 决定如何处理模块
     "moduleResolution": "bundler",
+    // 允许引入ts扩展
     "allowImportingTsExtensions": true,
+    // 将每个文件作为单独的模块
     "isolatedModules": true,
+    // 强制模块检查
     "moduleDetection": "force",
+    // 编译不输出文件
     "noEmit": true,
 
     /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noImplicitAny": false,
-    "noUnusedParameters": true,
+    // 启用严格模式，相当于启用noImplicitAny, --noImplicitThis, --alwaysStrict， --strictNullChecks和 --strictFunctionTypes和--strictPropertyInitialization。
+    "strict": false,
+    // 不允许case 贯穿
     "noFallthroughCasesInSwitch": true,
+    // 不允许 隐含的this指向
     "noImplicitThis": false
   },
+  // 只影响当前配置中包含的文件
   "include": ["vite.config.ts"]
 }

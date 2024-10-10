@@ -230,5 +230,5 @@ console.log('笔试..........................');
   const m = 5;
   const numbers = [3, 2, 1, 0, 1];
   const result = maxScore(m, numbers);
-  console.log(result);
+  // console.log(result);
 }
